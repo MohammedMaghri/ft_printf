@@ -5,56 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 18:08:54 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/12 22:59:24 by mmaghri          ###   ########.fr       */
+/*   Created: 2023/11/14 12:06:59 by mmaghri           #+#    #+#             */
+/*   Updated: 2023/11/14 21:29:57 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "printf.h"
+#include "ft_printf.h"
 #include <stdarg.h>
+#include <unistd.h>
+#include <stdio.h>
 
-static void	checkstring(const char str, va_list args)
+static void	check(const char string, va_list args, int *num)
 {
-	int	index ;
-
-	index = 0 ;
-	if (str == '%')
-		paste(str);
-	else if (str == 'd' || (str == 'i'))
-		numberpaste(va_arg(args, int));
-	else if (str == 's')
-		stringpaste(va_arg(args, char *));
-	else if (str == 'c')
-		paste(va_arg(args, int));
-	else if (str == 'x')
-		smallhex(va_arg(args, int));
-	else if (str == 'X')
-		hexaconv(va_arg(args, int));
+	if (string == 'c')
+		paste(va_arg(args, int), num);
+	else if (string == 's')
+		putstring(va_arg(args, char *), num);
+	else if (string == 'd' || string == 'i')
+		putnbr(va_arg(args, int), num);
+	else if (string == 'p')
+		allthatshit(va_arg(args, int), num);
 }
 
 int	ft_printf(const char *string, ...)
 {
-	va_list	arglist;
-	size_t	num;
+	va_list	args;
+	int		res;	
+	int		index;
 
-	va_start(arglist, string);
-	num = 0 ;
+	index = 0;
+	res = 0;
+	va_start(args, string);
 	while (*string)
 	{
 		if (*string == '%')
 		{
-			string++ ;
-			checkstring(*string, arglist);
+			if (*(string + 1) == '%')
+				paste('%', &res);
+			string++;
+			check(*string, args, &res);
+			string++;
 		}
-		else
-			paste(*string);
-		string++ ;
+		else 
+			paste(*string++, &res);
 	}
-	va_end(arglist);
-	return (num);
+	return (res);
 }
 int main()
 {
-	ft_printf("%x" ,4572 );
+	ft_printf("%p" , 0 );
 }
