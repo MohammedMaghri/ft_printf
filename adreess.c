@@ -6,7 +6,7 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:12:49 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/14 21:35:53 by mmaghri          ###   ########.fr       */
+/*   Updated: 2023/11/15 11:17:24 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*swap(char *string)
 	return (newstr);
 }
 
-static void	hexman(long long number, int *len)
+static void	hexman(unsigned long long number, int *len)
 {
 	char	*allocation ;
 	char	*hexanumber;
@@ -77,10 +77,12 @@ static void	hexman(long long number, int *len)
 	merge(theswap, len);
 }
 
-void	allthatshit(int number, int *len)
+void	allthatshit(unsigned long number, int *len)
 {
 	if (number == 0)
+	{
 		putstring("0x0", len);
 		return ;
+	}
 	hexman(number, len);
 }

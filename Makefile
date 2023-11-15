@@ -1,16 +1,21 @@
 
-SRC = lencount.c adreess.c putnum.c putstring.c paste.c ft_printf.c
-OBJS = ${SRC:.c=.o}
-CC = CC
-CFLAGS = -Wall -Wextra -Werror
-NAME = libftprintf.a
-RM = rm -f 
+NAME	= libftprintf.a
+SRCS	= turn.c callhex.c uuuss.c lencount.c  putnum.c putstring.c paste.c ft_printf.c
 
-all : $(NAME)
+OBJS	= ${SRCS:%.c=%.o}
 
-$(NAME): $(OBJS) libftprintf.a
-			ar rcs $(NAME) $(OBJS)
-clean :
-		$(RM) $(OBJS)
+FLAGS	= -Wall -Wextra -Werror
+
+$(NAME):
+	gcc $(FLAGS) -c $(SRCS) -I ./
+	ar rc $(NAME) $(OBJS)
+
+all: $(NAME)
+
+clean:
+	rm -rf $(OBJS)
+
 fclean: clean
-		rm -f $(RM) $(NAME)
+	rm -rf $(NAME)
+
+re: fclean all

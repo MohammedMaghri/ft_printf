@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lencount.c                                         :+:      :+:    :+:   */
+/*   uuu.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 20:04:51 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/14 22:21:01 by mmaghri          ###   ########.fr       */
+/*   Created: 2023/11/14 22:15:26 by mmaghri           #+#    #+#             */
+/*   Updated: 2023/11/15 15:24:28 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	lencount(char *string)
+void	uuusi(unsigned int number, int *len)
 {
-	int	index;
-
-	index = 0;
-	while (string[index])
+	if (number < 10)
 	{
-		index++;
+		paste(number + '0', len);
 	}
-	return (index);
+	if (number > 9)
+	{
+		uuusi(number / 10, len);
+		uuusi(number % 10, len);
+	}
 }

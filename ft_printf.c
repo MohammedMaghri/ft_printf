@@ -6,7 +6,7 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:06:59 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/14 21:29:57 by mmaghri          ###   ########.fr       */
+/*   Updated: 2023/11/15 22:16:56 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ static void	check(const char string, va_list args, int *num)
 	else if (string == 'd' || string == 'i')
 		putnbr(va_arg(args, int), num);
 	else if (string == 'p')
-		allthatshit(va_arg(args, int), num);
+		callhex(va_arg(args, unsigned long long), num);
+	else if (string == 'u')
+		uuusi(va_arg(args, unsigned int), num);
+	else if (string == 'X')
+		turn(va_arg(args, unsigned int), 'X', num);
+	else if (string == 'x')
+		turn(va_arg(args, unsigned int), 'x', num);
 }
 
 int	ft_printf(const char *string, ...)
@@ -33,6 +39,8 @@ int	ft_printf(const char *string, ...)
 	int		res;	
 	int		index;
 
+	if (write(1, "", 0) == -1 || !string)
+		return (-1);
 	index = 0;
 	res = 0;
 	va_start(args, string);
@@ -50,8 +58,4 @@ int	ft_printf(const char *string, ...)
 			paste(*string++, &res);
 	}
 	return (res);
-}
-int main()
-{
-	ft_printf("%p" , 0 );
 }
