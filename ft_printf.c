@@ -6,7 +6,7 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:06:59 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/15 22:16:56 by mmaghri          ###   ########.fr       */
+/*   Updated: 2023/11/16 20:28:17 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ static void	check(const char string, va_list args, int *num)
 		turn(va_arg(args, unsigned int), 'X', num);
 	else if (string == 'x')
 		turn(va_arg(args, unsigned int), 'x', num);
+	else if (string != '%')
+		paste(string, num);
 }
 
 int	ft_printf(const char *string, ...)
 {
 	va_list	args;
 	int		res;	
-	int		index;
 
 	if (write(1, "", 0) == -1 || !string)
 		return (-1);
-	index = 0;
 	res = 0;
 	va_start(args, string);
 	while (*string)
@@ -51,11 +51,14 @@ int	ft_printf(const char *string, ...)
 			if (*(string + 1) == '%')
 				paste('%', &res);
 			string++;
+			if (*(string) == '\0')
+				return (0);
 			check(*string, args, &res);
 			string++;
 		}
-		else 
+		else
 			paste(*string++, &res);
 	}
+	va_end(args);
 	return (res);
 }

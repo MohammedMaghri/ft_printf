@@ -6,7 +6,7 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:01:22 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/15 16:43:53 by mmaghri          ###   ########.fr       */
+/*   Updated: 2023/11/16 20:31:34 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "ft_printf.h"
 
 void	callhex(unsigned long long nbr, int *len);
 void	downX(unsigned int number, int *len);
